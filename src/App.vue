@@ -1,11 +1,36 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+
+import { ref } from 'vue';
+
+const menuActive = ref(false);
+const menuHover = ref(false);
+
+const toggleMenu = () => {
+  menuActive.value = !menuActive.value;
+  menuHover.value = false;  // désactive le hover quand le menu est ouvert
+};
+
+const onMenuHover = () => {
+  if (!menuActive.value) {
+    menuHover.value = true;
+  }
+};
+
+const onMenuLeave = () => {
+  menuHover.value = false;
+};
 </script>
 
 <template>
   <header>
     <div class="wrapper">
-      <nav class="menu" :class="{ 'menu-active': menuActive, 'menu-hover': menuHover }">
+      <nav
+        class="menu"
+        :class="{ 'menu-active': menuActive, 'menu-hover': menuHover }"
+        @mouseleave="onMenuLeave"
+        @mouseenter="onMenuHover"
+      >
         <h1 @click="toggleMenu">Menu</h1>
         <ul>
           <li><RouterLink to="/">Home</RouterLink></li>
@@ -23,18 +48,6 @@ import { RouterLink, RouterView } from 'vue-router'
     </div>
   </header>
 </template>
-
-<script lang="ts">
-import { ref } from 'vue';
-
-const menuActive = ref(false);
-const menuHover = ref(false);
-
-function toggleMenu() {
-  menuActive.value = !menuActive.value;
-  menuHover.value = false;
-}
-</script>
 
 <style lang="scss" scoped>
 @use "sass:color";
@@ -177,19 +190,6 @@ main {
   &.menu-hover {
     border-radius: .001px;
     transform: translateX((calc($menuWidth / 16))) rotateY($degHover);
-  }
-
-  section {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    padding: 1em 4em;
-    max-width: 680px;
-    overflow: auto;
-    background-color: rgba(white, .5);
   }
 }
 
