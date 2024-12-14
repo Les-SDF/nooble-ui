@@ -1,5 +1,6 @@
 export interface User {
   id: number;
+  username : string;
   members: Member[];
   customerRegistrations: CustomerRegistration[];
   managers: Manager[];

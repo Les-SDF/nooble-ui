@@ -2,7 +2,24 @@
 import { FwbJumbotron } from 'flowbite-vue'
 import StarsBackground from '@/components/StarsBackground.vue'
 import EventCard from '@/components/EventCard.vue'
+// import { ref } from 'vue';
+// import type { Ref } from 'vue';
+// import type { User } from '@/types';
+// import { apiStore } from '@/util/apiStore';
+// import EntityEnum from '@/util/lib/entityEnum';
 
+// const users: Ref<User[]> = ref([]);
+
+// apiStore.getAll('users').then(reponseJSON => {
+//     users.value = reponseJSON["member"]
+// });
+
+// const user = ref(null);
+// const userId = 1;
+
+// apiStore.getById(EntityEnum.user, userId).then(response => {
+//   user.value = response;
+// });
 
 const cardData = [
   {
