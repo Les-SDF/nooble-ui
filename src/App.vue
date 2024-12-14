@@ -55,13 +55,13 @@ const onMenuLeave = () => {
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,800,200);
 
 $menuWidth: 16em;
-$menuColor: #353441;
-$menuText: #9DC6D1;
+$menuColor: #c0d4ff;
+$menuText: #303237;
 $menuItemHeight: 60px;
 $degActive: 15deg;
 $degHover: 1deg;
 $timing: 150ms;
-$contentBG: #9DC6D1;
+$contentBG: #12829f;
 $bodyBg: #21212D;
 
 html,

@@ -36,29 +36,26 @@ https://images.unsplash.com/photo-1621075160523-b936ad96132a?ixlib=rb-1.2.1&ixid
 <style lang="scss" scoped>
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-  sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(22, 20, 24);
-  color: #eee;
+  background-color: #191b22; /* Dark background */
+  color: #b9bdcc; /* Light text */
   user-select: none;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-  monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .nft{
   user-select:none;
   max-width: 300px;
   margin: 5rem auto;
-  border: 1px solid #ffffff22;
-  background-color: #282c34;
-  background: linear-gradient(0deg, rgba(40,44,52,1) 0%, rgba(17,0,32,.5) 100%);
-  box-shadow: 0 7px 20px 5px #00000088;
+  border: 1px solid rgba(128, 168, 216, 0.13);
+  background-color: #005fff; /* Darker background with blue undertones */
+  background: linear-gradient(0deg, rgb(65, 92, 170) 0%, rgba(14, 45, 110, 0.5) 100%);
+  box-shadow: 0 7px 20px 5px rgba(29, 29, 32, 0.53);
   border-radius: .7rem;
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
@@ -67,7 +64,7 @@ code {
   hr{
     width: 100%;
     border: none;
-    border-bottom: 1px solid #88888855;
+    border-bottom: 1px solid rgba(90, 95, 129, 0.33);
     margin-top: 0;
   }
   ins{
@@ -86,7 +83,7 @@ code {
     }
     .description{
       margin: .5rem 0;
-      color: #a89ec9;
+      color: #a0c0e3;
     }
     .tokenInfo{
       display: flex;
@@ -95,7 +92,7 @@ code {
       .price{
         display: flex;
         align-items: center;
-        color: #ee83e5;
+        color: #90aada;
         font-weight: 700;
         ins{
           margin-left: -.3rem;
@@ -105,7 +102,7 @@ code {
       .duration{
         display: flex;
         align-items: center;
-        color: #a89ec9;
+        color: #798add;
         margin-right: .2rem;
         ins{
           margin: .5rem;
@@ -119,21 +116,21 @@ code {
       margin-top: .2rem;
       margin-bottom: -.3rem;
       ins{
-        color: #a89ec9;
+        color: #9ea8c9;
         text-decoration: none;
       }
       .wrapper{
         display: flex;
         align-items: center;
-        border: 1px solid #ffffff22;
+        border: 1px solid rgba(226, 229, 236, 0.56);
         padding: .3rem;
         margin: 0;
         margin-right: .5rem;
         border-radius: 100%;
-        box-shadow: inset 0 0 0 4px #000000aa;
+        box-shadow: inset 0 0 0 4px rgba(103, 114, 156, 0.67);
         img{
           border-radius: 100%;
-          border: 1px solid #ffffff22;
+          border: 1px solid rgba(219, 221, 228, 0.13);
           width: 2rem;
           height: 2rem;
           object-fit: cover;
@@ -145,7 +142,7 @@ code {
   ::before{
     position: fixed;
     content: "";
-    box-shadow: 0 0 100px 40px #ffffff08;
+    box-shadow: 0 0 100px 40px rgba(190, 196, 220, 0.03);
     top: -10%;
     left: -100%;
     transform: rotate(-45deg);
@@ -154,7 +151,7 @@ code {
   }
   &:hover{
     border: 1px solid #ffffff44;
-    box-shadow: 0 7px 50px 10px #000000aa;
+    box-shadow: 0 7px 50px 10px rgba(42, 42, 46, 0.67);
     transform: scale(1.015);
     filter: brightness(1.3);
     ::before{
