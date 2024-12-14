@@ -11,6 +11,32 @@ function connect():void{
 }
 </script>
 
+
+
+<!-- Version Tailwind (c'est plus moche)-->
+<!--<template>
+  <div class="w-full h-full max-w-sm p-5 rounded-lg shadow-lg">
+    <div class="text-center mb-5">
+      <h3 class="text-2xl font-semibold text-gray-800">Connection</h3>
+    </div>
+    <form @submit.prevent="connect" class="flex flex-col">
+      <div class="mb-5">
+        <label for="login" class="block text-sm text-gray-600 mb-2">Login</label>
+        <input id="login" v-model="connectingUser.login" class="w-full p-3 text-lg border border-gray-300 rounded-md bg-white focus:outline-none focus:border-blue-500" type="text" placeholder="Entrez votre login" />
+      </div>
+      <div class="mb-5">
+        <label for="password" class="block text-sm text-gray-600 mb-2">Mot de passe</label>
+        <input id="password" v-model="connectingUser.password" class="w-full p-3 text-lg border border-gray-300 rounded-md bg-white focus:outline-none focus:border-blue-500" type="password" placeholder="Entrez votre mot de passe" />
+      </div>
+      <button type="submit" class="py-3 text-lg text-white bg-blue-600 rounded-md w-full hover:bg-blue-700 active:bg-blue-800 transition-colors">
+        Connexion
+      </button>
+    </form>
+  </div>
+</template>-->
+
+
+
 <template>
   <div class="wrapper">
     <div class="top">
@@ -81,14 +107,14 @@ function connect():void{
 
 .input:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: #1a56db;
 }
 
 .submit-btn {
   padding: 12px;
   font-size: 16px;
   color: white;
-  background-color: #007bff;
+  background-color: #1a56db;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -96,11 +122,11 @@ function connect():void{
 }
 
 .submit-btn:hover {
-  background-color: #0056b3;
+  background-color: #1e429f;
 }
 
 .submit-btn:active {
-  background-color: #003f7f;
+  background-color: #1e429f;
 }
 </style>
 

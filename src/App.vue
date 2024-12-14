@@ -55,8 +55,8 @@ const onMenuLeave = () => {
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,800,200);
 
 $menuWidth: 16em;
-$menuColor: #c0d4ff;
-$menuText: #303237;
+$menuColor: #161a23;
+$menuText: #6998ca;
 $menuItemHeight: 60px;
 $degActive: 15deg;
 $degHover: 1deg;
@@ -122,7 +122,7 @@ nav {
     cursor: pointer;
     &:hover {
       color: $menuColor;
-      background: #fff;
+      background: #354b7a;
     }
   }
 
@@ -144,7 +144,7 @@ nav {
       background-color: color.adjust($menuColor, $lightness: 2%);
     }
     &:hover {
-      background: #fff;
+      background: #354b7a;
     }
   }
 }

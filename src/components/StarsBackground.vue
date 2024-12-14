@@ -8,7 +8,7 @@
 </template>
 
 <style>
-/*body {
+body {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,7 +16,7 @@
   background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
   overflow: hidden;
   z-index: -4;
-}*/
+}
 
 </style>
 

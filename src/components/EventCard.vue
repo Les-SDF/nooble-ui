@@ -54,7 +54,7 @@ code {
   margin: 5rem auto;
   border: 1px solid rgba(128, 168, 216, 0.13);
   background-color: #005fff; /* Darker background with blue undertones */
-  background: linear-gradient(0deg, rgb(65, 92, 170) 0%, rgba(14, 45, 110, 0.5) 100%);
+  background: linear-gradient(0deg, rgb(65, 92, 170) 0%, rgba(30, 71, 158, 0.5) 100%);
   box-shadow: 0 7px 20px 5px rgba(29, 29, 32, 0.53);
   border-radius: .7rem;
   backdrop-filter: blur(7px);
@@ -83,26 +83,16 @@ code {
     }
     .description{
       margin: .5rem 0;
-      color: #a0c0e3;
+      color: #6998ca;
     }
     .tokenInfo{
       display: flex;
       justify-content: space-between;
       align-items: center;
-      .price{
-        display: flex;
-        align-items: center;
-        color: #90aada;
-        font-weight: 700;
-        ins{
-          margin-left: -.3rem;
-          margin-right: .5rem;
-        }
-      }
       .duration{
         display: flex;
         align-items: center;
-        color: #798add;
+        color: #8a97d5;
         margin-right: .2rem;
         ins{
           margin: .5rem;
@@ -116,7 +106,7 @@ code {
       margin-top: .2rem;
       margin-bottom: -.3rem;
       ins{
-        color: #9ea8c9;
+        color: #8a97d5;
         text-decoration: none;
       }
       .wrapper{

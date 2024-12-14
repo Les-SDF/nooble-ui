@@ -71,6 +71,7 @@ function closeSignInModal() {
 <template>
   <div>
     <fwb-jumbotron header-text="Join an engaged community now!"
+                   header-classes="text-white"
                    sub-text="Organise E-sport-focused event with ease."
                    style="background: transparent;">
       <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 space-x-3">
@@ -79,7 +80,7 @@ function closeSignInModal() {
           Sign up
         </div>
         <div @click.prevent="openSignInModal"
-           class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-blue-700 bg-white border border-blue-700 rounded-lg transition-all duration-300 hover:bg-blue-800 hover:text-white hover:border-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-900">
+           class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-blue-700 bg-white border border-blue-700 rounded-lg transition-all duration-300 hover:text-white hover:bg-blue-700 hover:border-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-900">
           Sign in
         </div>
       </div>
@@ -113,6 +114,10 @@ function closeSignInModal() {
 </template>
 
 <style scoped>
+fwb-jumbotron .sub-text {
+  color: #6998ca;
+}
+
 .card-list {
   display: flex;
   flex-wrap: wrap;
