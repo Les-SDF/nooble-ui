@@ -2,6 +2,8 @@
 import { FwbJumbotron } from 'flowbite-vue'
 import StarsBackground from '@/components/StarsBackground.vue'
 import EventCard from '@/components/EventCard.vue'
+import { ref } from 'vue'
+import UserLogin from '@/views/UserLogin.vue'
 // import { ref } from 'vue';
 // import type { Ref } from 'vue';
 // import type { User } from '@/types';
@@ -45,6 +47,17 @@ const cardData = [
   },
 ];
 
+const showSignInModal = ref(false);
+
+function openSignInModal() {
+  console.log(showSignInModal);
+  showSignInModal.value = true;
+}
+
+function closeSignInModal() {
+  showSignInModal.value = false;
+}
+
 </script>
 
 <template>
@@ -52,13 +65,23 @@ const cardData = [
     <fwb-jumbotron header-text="Join an engaged community now!"
                    sub-text="Organise E-sport-focused event with ease."
                    style="background: transparent;">
-      <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+      <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 space-x-3">
         <a href="#"
-           class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+           class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-white bg-blue-700 border border-blue-700 rounded-lg transition-all duration-300 hover:bg-blue-800 hover:border-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-900">
           Sign up
+        </a>
+        <a @click.prevent="openSignInModal"
+           class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-blue-700 bg-white border border-blue-700 rounded-lg transition-all duration-300 hover:bg-blue-800 hover:text-white hover:border-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-900">
+          Sign in
         </a>
       </div>
     </fwb-jumbotron>
+
+    <div v-if="showSignInModal" class="modal-overlay" @click="closeSignInModal">
+      <div class="modal-content" @click.stop>
+        <UserLogin />
+      </div>
+    </div>
 
     <div class="card-list">
       <event-card
@@ -82,4 +105,26 @@ const cardData = [
   gap: 16px;
   justify-content: center;
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 </style>
