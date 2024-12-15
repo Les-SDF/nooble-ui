@@ -2,7 +2,9 @@
 import { RouterLink, RouterView } from 'vue-router'
 
 import { ref } from 'vue';
+import { apiStore } from '@/util/apiStore';
 
+const loaded = ref(false);
 const menuActive = ref(false);
 const menuHover = ref(false);
 //@TODO A changer quand connexion implemente
@@ -26,11 +28,18 @@ const onMenuLeave = () => {
 //@TODO A changer quand connexion implemente
 const logout = () => {
   isLoggedIn.value = false;
+  apiStore.logout();
 };
+apiStore.refresh().then(() => {
+  loaded.value = true;
+}).catch(() => {
+  loaded.value = true;
+});
+
 </script>
 
 <template>
-  <header>
+  <header v-if="loaded">
     <div class="wrapper">
       <nav
         class="menu"

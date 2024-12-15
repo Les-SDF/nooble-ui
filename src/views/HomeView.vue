@@ -77,7 +77,7 @@ function openSignInModal() {
 function closeSignInModal() {
   showSignInModal.value = false;
 }
-
+console.log("Est connecter : " + apiStore.estConnecte );
 </script>
 
 <template>
@@ -86,7 +86,7 @@ function closeSignInModal() {
                    header-classes="text-white"
                    sub-text="Organise E-sport-focused event with ease."
                    style="background: transparent;">
-      <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 space-x-3">
+      <div v-if="!apiStore.estConnecte" class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 space-x-3">
         <div @click.prevent="openSignOutModal"
            class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-white bg-blue-700 border border-blue-700 rounded-lg transition-all duration-300 hover:bg-blue-800 hover:border-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-900">
           Sign up

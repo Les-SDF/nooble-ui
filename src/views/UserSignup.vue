@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {ref} from 'vue';
 import { apiStore } from '@/util/apiStore.ts'
+import EntityEnum from '@/util/lib/entityEnum';
 const connectingUser = ref({
   login: "",
   password:""
@@ -16,7 +17,11 @@ function create(): void {
   }
 
   errorMessage.value = "";
-  apiStore.create(connectingUser.value.login, connectingUser.value.password);
+  apiStore.createUser(connectingUser.value.login, connectingUser.value.password);
+//   apiStore.create(EntityEnum.user, {
+//   email: connectingUser.value.login,
+//   plainPassword: connectingUser.value.password
+// });
 }
 </script>
 
