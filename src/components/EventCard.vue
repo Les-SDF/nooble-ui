@@ -1,12 +1,32 @@
 <script setup lang="ts">
-defineProps({
+import { EventStatus } from '@/util/lib/EventStatus';
+
+const props = defineProps({
   title : String,
   image : String,
   description: String,
   time: Number,
-  creator: String
+  startDate: Date,
+  endDate: Date,
+  status: EventStatus,
+  creator: String,
 })
 
+let computedTime: number;
+
+if (props.time == null) {
+  const now = new Date();
+
+  if (props.startDate && new Date(props.startDate) > now) {
+    computedTime = Math.ceil((new Date(props.startDate).getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+  } else if (props.endDate && new Date(props.endDate) > now) {
+    computedTime = Math.ceil((new Date(props.endDate).getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+  } else {
+    computedTime = 0;
+  }
+} else {
+  computedTime = props.time;
+}
 </script>
 https://images.unsplash.com/photo-1621075160523-b936ad96132a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80
 
@@ -19,7 +39,9 @@ https://images.unsplash.com/photo-1621075160523-b936ad96132a?ixlib=rb-1.2.1&ixid
       <div class='tokenInfo'>
         <div class="duration">
           <ins>◷</ins>
-          <p>{{time || 11}} days left</p>
+          <p>{{computedTime}} days left</p>
+          <span class="separator">|</span>
+          <p>{{status || "Unknow" }}</p>
         </div>
       </div>
       <hr />
@@ -27,7 +49,7 @@ https://images.unsplash.com/photo-1621075160523-b936ad96132a?ixlib=rb-1.2.1&ixid
         <div class='wrapper'>
           <img src="https://images.unsplash.com/photo-1620121692029-d088224ddc74?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80" alt="Creator" />
         </div>
-        <p><ins>Organize by</ins> {{ creator || 'Kiberbash' }}</p>
+        <p><ins>Organize by</ins> {{ creator || 'Unknow' }}</p>
       </div>
     </div>
   </div>
@@ -149,6 +171,10 @@ code {
       top: -100%;
       left: 200%;
     }
+  }
+  .separator {
+    margin: 0 0.5rem;
+    color: #8a97d5;
   }
 }
 

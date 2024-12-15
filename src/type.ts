@@ -1,3 +1,5 @@
+import type { EventStatus } from "./util/lib/EventStatus";
+
 export interface User {
   id: number;
   username : string;
@@ -17,12 +19,18 @@ export interface Sponsor {
 
 export interface Event {
   id: number;
+  name: string;
+  description : string;
+  creator: User;
+  endDate : Date;
+  startDate : Date;
   eventRewards: EventReward[];
   eventSponsors: EventSponsor[];
   customerRegistrations: CustomerRegistration[];
   confrontations: Confrontation[];
   managers: Manager[];
   teamRegistrations: TeamRegistration[];
+  status: EventStatus | null;
 }
 
 export interface Reward {

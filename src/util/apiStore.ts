@@ -1,5 +1,5 @@
 export const apiStore = {
-  apiUrl: "http://localhost:80/nooble/public/api/",
+  apiUrl: "http://localhost:8086/nooble/public/api/",
 
   getAll(ressource: string): Promise<unknown> {
     return fetch(`${this.apiUrl}${ressource}`)

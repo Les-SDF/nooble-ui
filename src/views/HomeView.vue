@@ -5,10 +5,13 @@ import EventCard from '@/components/EventCard.vue'
 import { ref } from 'vue'
 import UserLogin from '@/views/UserLogin.vue'
 // import { ref } from 'vue';
-// import type { Ref } from 'vue';
+import type { Ref } from 'vue';
 // import type { User } from '@/types';
 // import { apiStore } from '@/util/apiStore';
 // import EntityEnum from '@/util/lib/entityEnum';
+import type { Event } from '@/types';
+import { apiStore } from '@/util/apiStore';
+import EntityEnum from '@/util/lib/entityEnum';
 
 // const users: Ref<User[]> = ref([]);
 
@@ -22,6 +25,14 @@ import UserLogin from '@/views/UserLogin.vue'
 // apiStore.getById(EntityEnum.user, userId).then(response => {
 //   user.value = response;
 // });
+
+const events: Ref<Event[]> = ref([]);
+
+apiStore.getAll(EntityEnum.event).then(reponseJSON => {
+  console.log(reponseJSON);
+  events.value = reponseJSON["member"];
+  console.log(events);
+});
 
 const cardData = [
   {
@@ -99,14 +110,14 @@ function closeSignInModal() {
     </div>
 
     <div class="card-list">
-      <event-card
-        v-for="(nft, index) in cardData"
-        :key="index"
-        :title="nft.title"
-        :image="nft.image"
-        :description="nft.description"
-        :time="nft.time"
-        :creator="nft.creator"
+      <event-card v-for="(nft, index) in events"
+      :key="index"
+      :title="nft.name"
+      :description="nft.description"
+      :creator="nft.creator.username"
+      :startDate="new Date(nft.startDate)"
+      :endDate="new Date(nft.endDate)"
+      :status="nft.status"
       />
     </div>
     <stars-background></stars-background>
