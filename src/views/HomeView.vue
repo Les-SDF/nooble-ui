@@ -4,6 +4,7 @@ import StarsBackground from '@/components/StarsBackground.vue'
 import EventCard from '@/components/EventCard.vue'
 import { ref } from 'vue'
 import UserLogin from '@/views/UserLogin.vue'
+import UserSignup from '@/views/UserSignup.vue'
 // import { ref } from 'vue';
 import type { Ref } from 'vue';
 // import type { User } from '@/types';
@@ -105,7 +106,7 @@ function closeSignInModal() {
 
     <div v-if="showSignOutModal" class="modal-overlay" @click="closeSignOutModal">
       <div class="modal-content" @click.stop>
-        <UserLogin />
+        <UserSignup />
       </div>
     </div>
 
