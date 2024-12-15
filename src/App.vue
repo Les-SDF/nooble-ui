@@ -5,6 +5,8 @@ import { ref } from 'vue';
 
 const menuActive = ref(false);
 const menuHover = ref(false);
+//@TODO A changer quand connexion implemente
+const isLoggedIn = ref(true); // Simule si l'utilisateur est connecté
 
 const toggleMenu = () => {
   menuActive.value = !menuActive.value;
@@ -20,6 +22,11 @@ const onMenuHover = () => {
 const onMenuLeave = () => {
   menuHover.value = false;
 };
+
+//@TODO A changer quand connexion implemente
+const logout = () => {
+  isLoggedIn.value = false;
+};
 </script>
 
 <template>
@@ -33,14 +40,19 @@ const onMenuLeave = () => {
       >
         <h1 @click="toggleMenu">Menu</h1>
         <ul>
-          <li><RouterLink to="/">Home</RouterLink></li>
-          <li>Susy</li>
-          <li>Jack</li>
-          <li>Nancy</li>
-          <li>Kurt</li>
-          <li>Clay</li>
-          <li>Lisa</li>
+          <li @click="menuActive = false">
+            <RouterLink to="/">Home</RouterLink>
+          </li>
+          <li @click="menuActive = false">
+            <RouterLink to="/events">Events</RouterLink>
+          </li>
+          <li v-if="isLoggedIn" @click="menuActive = false">
+            <RouterLink to="/profile">Profile</RouterLink>
+          </li>
         </ul>
+        <div v-if="isLoggedIn" class="logout-btn" @click="logout">
+          Logout
+        </div>
       </nav>
       <main :class="{ 'menu-active': menuActive }">
         <RouterView />
@@ -63,6 +75,8 @@ $degHover: 1deg;
 $timing: 150ms;
 $contentBG: #12829f;
 $bodyBg: #21212D;
+$hoverBg: #354b7a;
+$logoutBg: #e63946;
 
 html,
 body {
@@ -87,7 +101,7 @@ main {
 }
 
 nav {
-  z-index: 100;
+  z-index: 1;
   position: absolute;
   top: 0;
   left: 0;
@@ -102,10 +116,8 @@ nav {
     transform: translateX(-($menuWidth - calc($menuWidth / 16)));
   }
 
-  // Menu Toggle
   h1 {
-    z-index: 100;
-    display: block;
+    z-index: 1;
     position: absolute;
     top: 0;
     right: -$menuItemHeight;
@@ -122,7 +134,7 @@ nav {
     cursor: pointer;
     &:hover {
       color: $menuColor;
-      background: #354b7a;
+      background: $hoverBg;
     }
   }
 
@@ -130,21 +142,46 @@ nav {
     margin: 0;
     padding: 0;
     list-style: none;
+
+    li {
+      display: block;
+      padding: 0 1em;
+      width: 100%;
+      height: $menuItemHeight;
+      line-height: $menuItemHeight;
+      color: $menuText;
+      cursor: pointer;
+      background-color: $menuColor;
+
+      &:hover {
+        background-color: $hoverBg;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 
-  li {
-    display: block;
-    padding: 0 1em;
-    width: 100%;
-    height: $menuItemHeight;
-    color: $menuText;
-    line-height: $menuItemHeight;
-    background-color: $menuColor;
-    &:nth-of-type(2n) {
-      background-color: color.adjust($menuColor, $lightness: 2%);
-    }
+  .logout-btn {
+    position: absolute;
+    bottom: 1em;
+    width: calc(100% - 2em);
+    margin: 0 1em;
+    padding: 0.5em 0;
+    text-align: center;
+    color: white;
+    background-color: $logoutBg;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
     &:hover {
-      background: #354b7a;
+      background-color: color.adjust($logoutBg, $lightness: -10%);
     }
   }
 }
@@ -156,12 +193,9 @@ main {
   left: 0;
   bottom: 0;
   right: 0;
-  align-items: center;
-  overflow: hidden; // Can't scroll this container or the overflow will be visible when the menu is active
-
+  overflow: hidden;
   transform-origin: 0% 50%;
 
-  // Shadow
   &:after {
     content: '';
     display: block;
@@ -192,6 +226,4 @@ main {
     transform: translateX((calc($menuWidth / 16))) rotateY($degHover);
   }
 }
-
-
 </style>
