@@ -139,7 +139,6 @@ fwb-jumbotron .sub-text {
 }
 
 .modal-content {
-  background-color: white;
   border-radius: 8px;
   max-width: 400px;
   width: 100%;

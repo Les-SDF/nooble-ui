@@ -14,119 +14,31 @@ function connect():void{
 
 
 <!-- Version Tailwind (c'est plus moche)-->
-<!--<template>
-  <div class="w-full h-full max-w-sm p-5 rounded-lg shadow-lg">
-    <div class="text-center mb-5">
-      <h3 class="text-2xl font-semibold text-gray-800">Connection</h3>
-    </div>
-    <form @submit.prevent="connect" class="flex flex-col">
-      <div class="mb-5">
-        <label for="login" class="block text-sm text-gray-600 mb-2">Login</label>
-        <input id="login" v-model="connectingUser.login" class="w-full p-3 text-lg border border-gray-300 rounded-md bg-white focus:outline-none focus:border-blue-500" type="text" placeholder="Entrez votre login" />
-      </div>
-      <div class="mb-5">
-        <label for="password" class="block text-sm text-gray-600 mb-2">Mot de passe</label>
-        <input id="password" v-model="connectingUser.password" class="w-full p-3 text-lg border border-gray-300 rounded-md bg-white focus:outline-none focus:border-blue-500" type="password" placeholder="Entrez votre mot de passe" />
-      </div>
-      <button type="submit" class="py-3 text-lg text-white bg-blue-600 rounded-md w-full hover:bg-blue-700 active:bg-blue-800 transition-colors">
-        Connexion
-      </button>
-    </form>
-  </div>
-</template>-->
-
-
-
 <template>
-  <div class="wrapper">
-    <div class="top">
-      <h3 class="title">Connection</h3>
+  <section class="dark:bg-gray-900">
+    <div class="flex flex-col items-center justify-center mx-auto md:h-screen lg:py-0">
+        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                    Sign in to your account
+                </h1>
+                <form @submit.prevent="connect" class="space-y-4 md:space-y-6" action="#">
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                        <input type="email" name="email" id="email" v-model="connectingUser.login" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
+                    </div>
+                    <div>
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                        <input type="password" name="password" id="password" v-model="connectingUser.password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                    </div>
+                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                    <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                        Don’t have an account yet? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+                    </p>
+                </form>
+            </div>
+        </div>
     </div>
-    <form @submit.prevent="connect" class="form-content">
-      <div class="group">
-        <label for="login" class="label">Login</label>
-        <input id="login" v-model="connectingUser.login" class="input" type="text" placeholder="Entrez votre login" />
-      </div>
-      <div class="group">
-        <label for="password" class="label">Mot de passe</label>
-        <input id="password" v-model="connectingUser.password" class="input" type="password" placeholder="Entrez votre mot de passe" />
-      </div>
-      <button type="submit" class="submit-btn">
-        Connexion
-      </button>
-    </form>
-  </div>
+  </section>
 </template>
-
-<style scoped>
-.wrapper {
-  width: 100%;
-  height: 100%;
-  max-width: 400px;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.top {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.title {
-  font-size: 24px;
-  font-weight: 600;
-  color: #333;
-}
-
-.form-content {
-  display: flex;
-  flex-direction: column;
-}
-
-.group {
-  margin-bottom: 20px;
-}
-
-.label {
-  display: block;
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 8px;
-}
-
-.input {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #fff;
-  box-sizing: border-box;
-}
-
-.input:focus {
-  outline: none;
-  border-color: #1a56db;
-}
-
-.submit-btn {
-  padding: 12px;
-  font-size: 16px;
-  color: white;
-  background-color: #1a56db;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.submit-btn:hover {
-  background-color: #1e429f;
-}
-
-.submit-btn:active {
-  background-color: #1e429f;
-}
-</style>
 
