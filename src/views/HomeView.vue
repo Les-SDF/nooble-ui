@@ -10,7 +10,7 @@ import type { Ref } from 'vue';
 // import type { User } from '@/types';
 // import { apiStore } from '@/util/apiStore';
 // import EntityEnum from '@/util/lib/entityEnum';
-import type { Event } from '@/types';
+import type { Event } from '@/type';
 import { apiStore } from '@/util/apiStore';
 import EntityEnum from '@/util/lib/entityEnum';
 
@@ -29,9 +29,10 @@ import EntityEnum from '@/util/lib/entityEnum';
 
 const events: Ref<Event[]> = ref([]);
 
-apiStore.getAll(EntityEnum.event).then(reponseJSON => {
-  console.log(reponseJSON);
-  events.value = reponseJSON["member"];
+apiStore.getAll(EntityEnum.event).then((reponseJSON) => {
+  const data = reponseJSON as { member: Event[] };
+  console.log(data);
+  events.value = data.member;
   console.log(events);
 });
 

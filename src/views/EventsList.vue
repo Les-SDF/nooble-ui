@@ -3,12 +3,14 @@ import { ref, type Ref } from 'vue'
 import { apiStore } from '@/util/apiStore.ts'
 import EntityEnum from '@/util/lib/entityEnum.ts'
 import EventCard from '@/components/EventCard.vue'
+import type { Event } from '@/type';
 
 const events: Ref<Event[]> = ref([]);
 
-apiStore.getAll(EntityEnum.event).then(reponseJSON => {
-  console.log(reponseJSON);
-  events.value = reponseJSON["member"];
+apiStore.getAll(EntityEnum.event).then((reponseJSON) => {
+  const data = reponseJSON as { member: Event[] };
+  console.log(data);
+  events.value = data.member;
   console.log(events);
 });
 </script>

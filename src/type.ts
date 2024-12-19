@@ -30,7 +30,7 @@ export interface Event {
   confrontations: Confrontation[];
   managers: Manager[];
   teamRegistrations: TeamRegistration[];
-  status: EventStatus | null;
+  status: EventStatus | undefined;
 }
 
 export interface Reward {
