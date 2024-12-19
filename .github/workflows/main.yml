@@ -64,19 +64,9 @@ jobs:
           IUT_PASSW: ${{ secrets.IUT_PASSW }}
         run: |
           echo "Starting deployment..."
-
           lftp -u $IUT_USER,$IUT_PASSW -e "
             set ftp:ssl-allow no;
-
-            cd public_html || mkdir public_html;
-            cd public_html;
-            if [ -e nooble_ui ]; then
-              rm -r nooble_ui;
-            fi
-
-            mkdir -p nooble_ui;
-            cd nooble_ui;
-            mirror --reverse --delete --verbose dist .;
-
+            mirror --reverse --delete --verbose dist public_html
             bye;
           " sftp://ftpinfo.iutmontp.univ-montp2.fr
+
