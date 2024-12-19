@@ -2,6 +2,7 @@ import type { EventStatus } from "./util/lib/EventStatus";
 
 export interface User {
   id: number;
+  email : string;
   username : string;
   members: Member[];
   customerRegistrations: CustomerRegistration[];
