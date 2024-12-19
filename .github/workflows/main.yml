@@ -12,22 +12,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
+      # Install dependencies
       - name: Install dependencies
-        run: npm ci
+        run: |
+          if [ ! -f package-lock.json ]; then
+            echo "package-lock.json not found, running npm install to generate it..."
+            npm install
+          else
+            npm ci
+          fi
 
+      # Build the app
       - name: Build Vue.js app
         run: npm run build
 
+      # Archive the build (optional)
       - name: Archive build
         run: zip -r nooble_ui.zip dist
 
-
+      # Upload artifact
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
@@ -40,11 +53,11 @@ jobs:
     needs: build
 
     steps:
-
+      # Install lftp
       - name: Install lftp
         run: sudo apt-get install -y lftp
 
-
+      # Deploy via SFTP
       - name: Deploy via SFTP
         env:
           IUT_USER: ${{ secrets.IUT_USER }}
@@ -55,13 +68,11 @@ jobs:
           lftp -u $IUT_USER,$IUT_PASSW -e "
             set ftp:ssl-allow no;
 
-
             cd public_html || mkdir public_html;
             cd public_html;
             if [ -e nooble_ui ]; then
               rm -r nooble_ui;
             fi
-
 
             mkdir -p nooble_ui;
             cd nooble_ui;
