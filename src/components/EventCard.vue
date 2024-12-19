@@ -27,7 +27,7 @@ if (props.time == null) {
 } else {
   computedTime = props.time;
 }
-</script>
+</script>,
 
 <template>
   <div class="nft">
