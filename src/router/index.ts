@@ -20,12 +20,12 @@ const router = createRouter({
     {
       path: '/profile',
       name: 'profile',
-      component: () => import('@/views/Profile.vue'),
+      component: () => import('@/views/ProfileUser.vue'),
     },
     {
       path: '/events',
-      name: 'events',
-      component: () => import('@/views/Events.vue'),
+      name: 'EventList',
+      component: () => import('@/views/EventsList.vue'),
     },
   ],
 })
