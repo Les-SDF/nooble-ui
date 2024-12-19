@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {ref} from 'vue';
 import { apiStore } from '@/util/apiStore.ts'
-import EntityEnum from '@/util/lib/entityEnum';
 const connectingUser = ref({
   login: "",
   password:""

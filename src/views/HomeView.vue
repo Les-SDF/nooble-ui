@@ -35,30 +35,6 @@ apiStore.getAll(EntityEnum.event).then(reponseJSON => {
   console.log(events);
 });
 
-const cardData = [
-  {
-    title: "Kibertopiks #1234",
-    image: "https://images.unsplash.com/photo-1593642634443-44adaa06623a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-    description: "A unique digital collectible.",
-    time: 5,
-    creator: "CyberArtist",
-  },
-  {
-    title: "Mystic Flower",
-    image: "https://images.unsplash.com/photo-1528927309968-e4c829cb31f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-    description: "An exclusive floral artwork.",
-    time: 12,
-    creator: "NatureMuse",
-  },
-  {
-    title: "Void Warrior",
-    image: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-    description: "A mysterious warrior from the void.",
-    time: 3,
-    creator: "GalaxyForge",
-  },
-];
-
 const showSignInModal = ref(false);
 const showSignOutModal = ref(false);
 
