@@ -202,7 +202,7 @@ main {
   left: 0;
   bottom: 0;
   right: 0;
-  overflow: hidden;
+  overflow: auto;
   transform-origin: 0% 50%;
 
   &:after {

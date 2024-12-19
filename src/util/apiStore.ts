@@ -3,7 +3,7 @@ import { reactive } from "vue";
 export const apiStore = reactive({
   utilisateurConnecte: null,
   estConnecte : false,
-  apiUrl: "http://localhost:8086/nooble/public/api/",
+  apiUrl: "http://localhost:80/nooble-api/public/api/",
 
   getAll(ressource: string): Promise<unknown> {
     return fetch(`${this.apiUrl}${ressource}`)
