@@ -1,9 +1,10 @@
+/// <reference types="vite/client" />
 import { reactive } from "vue";
 
 export const apiStore = reactive({
   utilisateurConnecte: null,
   estConnecte : false,
-  apiUrl: "http://localhost:80/nooble-api/public/api/",
+  apiUrl: import.meta.env.VITE_API_URL,
 
   getAll(ressource: string): Promise<unknown> {
     return fetch(`${this.apiUrl}${ressource}`)
