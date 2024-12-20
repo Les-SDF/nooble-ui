@@ -33,7 +33,6 @@ if (props.time == null) {
   <div class="nft">
     <div class='main'>
       <img class='tokenImage' :src="image || 'https://images.unsplash.com/photo-1621075160523-b936ad96132a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'" alt="NFT" />
-      <h2>{{ title || 'Kibertopiks #4269' }}</h2>
       <p class='description'>{{ description || 'Our Kibertopiks will give you nothing, waste your money on us' }}.</p>
       <div class='tokenInfo'>
         <div class="duration">
@@ -69,10 +68,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
+h2 {
+  height: 2rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .nft {
   user-select: none;
   max-width: 300px;
   margin: 5rem auto;
+  margin-top: 2rem;
   border: 1px solid rgba(128, 168, 216, 0.13);
   background-color: #005fff; /* Darker background with blue undertones */
   background: linear-gradient(0deg, rgb(65, 92, 170) 0%, rgba(30, 71, 158, 0.5) 100%);
@@ -108,8 +116,13 @@ code {
     }
 
     .description {
-      margin: .5rem 0;
+      margin: 1rem 0;
       color: #6998ca;
+      max-width: 90%;
+      height: 5rem;
+      max-height: 5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .tokenInfo {
