@@ -58,7 +58,6 @@ jobs:
       - name: Unzip artifact
         run: unzip nooble_ui.zip
 
-      # Création d'un index.html comme dans l'exemple GitLab
       - name: Create index.html
         run: echo "<a href=\"nooble_ui.zip\">Last version -> nooble_ui.zip </a>" > index.html
 
@@ -73,6 +72,7 @@ jobs:
           echo "Starting deployment..."
           lftp -u $IUT_USER,$IUT_PASSW sftp://ftpinfo.iutmontp.univ-montp2.fr -e "
             set ftp:ssl-allow 0;
+            set sftp:auto-confirm yes;
             cd public_html;
             put nooble_ui.zip;
             put index.html;
