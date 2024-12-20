@@ -36,7 +36,7 @@ jobs:
       - name: Build Vue.js app
         run: npm run build
 
-      # Archive the build (optional)
+      # Archive the build
       - name: Archive build
         run: zip -r nooble_ui.zip dist
 
@@ -53,11 +53,25 @@ jobs:
     needs: build
 
     steps:
-      # Install lftp
+      # Checkout code (si besoin)
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Télécharger l'artefact du job build
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: nooble_ui
+
+      # Décompresser l'artefact
+      - name: Unzip artifact
+        run: unzip nooble_ui.zip
+
+      # Installer lftp
       - name: Install lftp
         run: sudo apt-get install -y lftp
 
-      # Deploy via SFTP
+      # Déployer via SFTP
       - name: Deploy via SFTP
         env:
           IUT_USER: ${{ secrets.IUT_USER }}
@@ -69,4 +83,3 @@ jobs:
             mirror --reverse --delete --verbose dist public_html
             bye;
           " sftp://ftpinfo.iutmontp.univ-montp2.fr
-
