@@ -10,6 +10,7 @@ jobs:
   build:
     name: Build Vue.js Application
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -31,7 +32,6 @@ jobs:
       - name: Build Vue.js app
         run: npm run build
 
-      # On n'a plus besoin de zipper, on upload simplement le dossier dist
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
@@ -52,13 +52,10 @@ jobs:
         with:
           name: dist_folder
 
-      - name: Create index.html
-        run: echo "<a href=\"\">Last version from dist folder</a>" > index.html
-
       - name: Install lftp
         run: sudo apt-get install -y lftp
 
-      - name: Deploy via SFTP
+      - name: Deploy via SFTP to nooble-ui folder
         env:
           IUT_USER: ${{ secrets.IUT_USER }}
           IUT_PASSW: ${{ secrets.IUT_PASSW }}
@@ -68,7 +65,7 @@ jobs:
             set ftp:ssl-allow 0;
             set sftp:auto-confirm yes;
             cd public_html;
-            mirror --reverse --delete --verbose dist ./
-            put index.html;
+            mkdir -p nooble-ui
+            mirror --reverse --verbose dist nooble-ui/dist
             bye
           "
