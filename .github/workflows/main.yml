@@ -12,35 +12,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      # Install dependencies
       - name: Install dependencies
         run: |
           if [ ! -f package-lock.json ]; then
-            echo "package-lock.json not found, running npm install to generate it..."
+            echo "package-lock.json not found, running npm install..."
             npm install
           else
             npm ci
           fi
 
-      # Build the app
       - name: Build Vue.js app
         run: npm run build
 
-      # Archive the build
       - name: Archive build
         run: zip -r nooble_ui.zip dist
 
-      # Upload artifact
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
@@ -53,33 +47,34 @@ jobs:
     needs: build
 
     steps:
-      # Checkout code (si besoin)
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Télécharger l'artefact du job build
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
           name: nooble_ui
 
-      # Décompresser l'artefact
       - name: Unzip artifact
         run: unzip nooble_ui.zip
 
-      # Installer lftp
+      # Création d'un index.html comme dans l'exemple GitLab
+      - name: Create index.html
+        run: echo "<a href=\"nooble_ui.zip\">Last version -> nooble_ui.zip </a>" > index.html
+
       - name: Install lftp
         run: sudo apt-get install -y lftp
 
-      # Déployer via SFTP
       - name: Deploy via SFTP
         env:
           IUT_USER: ${{ secrets.IUT_USER }}
           IUT_PASSW: ${{ secrets.IUT_PASSW }}
         run: |
           echo "Starting deployment..."
-          lftp -u $IUT_USER,$IUT_PASSW -e "
-            set ftp:ssl-allow no;
-            mirror --reverse --delete --verbose dist public_html
-            bye;
-          " sftp://ftpinfo.iutmontp.univ-montp2.fr
+          lftp -u $IUT_USER,$IUT_PASSW sftp://ftpinfo.iutmontp.univ-montp2.fr -e "
+            set ftp:ssl-allow 0;
+            cd public_html;
+            put nooble_ui.zip;
+            put index.html;
+            bye
+          "
