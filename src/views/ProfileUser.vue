@@ -2,7 +2,18 @@
 
 //@TODO remplacer par un appel à /users/{id}
 
-const user = {
+import { apiStore } from '@/util/apiStore.ts'
+import EntityEnum from '@/util/lib/entityEnum.ts'
+import { useRoute } from 'vue-router'
+import type { User } from '@/type.ts'
+
+const route = useRoute();
+
+apiStore.getById(EntityEnum.user, Number(route.params.id)).then(reponseJSON => {
+  console.log(reponseJSON);
+});
+
+const user: User = {
   id: 1,
   email: 'test@test.com',
   username: "Nikhil",
