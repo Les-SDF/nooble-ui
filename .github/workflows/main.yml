@@ -65,7 +65,8 @@ jobs:
             set ftp:ssl-allow 0;
             set sftp:auto-confirm yes;
             cd public_html;
-            cd nooble-ui
-            mirror --reverse --verbose dist nooble-ui/
+            cd nooble-ui;
+            mirror --reverse --verbose dist ./
             bye
           "
+
