@@ -2,5 +2,6 @@
 declare namespace NodeJS {
   interface ProcessEnv {
     VITE_API_URL: string;
+    VITE_BASE_URL: string;
   }
 }
