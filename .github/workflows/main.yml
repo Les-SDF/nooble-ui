@@ -66,6 +66,6 @@ jobs:
             set sftp:auto-confirm yes;
             cd public_html;
             mkdir -p nooble-ui
-            mirror --reverse --verbose dist nooble-ui/
+            mirror --reverse --verbose dist nooble-ui/dist
             bye
           "
