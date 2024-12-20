@@ -32,11 +32,12 @@ jobs:
       - name: Build Vue.js app
         run: npm run build
 
+      # On enregistre le dossier dist tel quel
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
           name: dist_folder
-          path: dist
+          path: dist/
 
   deploy:
     name: Deploy to Server
@@ -47,14 +48,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # On télécharge l'artefact du build (le dossier dist)
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
           name: dist_folder
 
+      # (Optionnel) Vérification du contenu
+      - name: List files
+        run: ls -R
+
       - name: Install lftp
         run: sudo apt-get install -y lftp
 
+      # Déploiement
+      # On met le contenu de dist dans le dossier nooble-ui sur le serveur
+      # sans créer de sous-dossier dist supplémentaire.
       - name: Deploy via SFTP to nooble-ui folder
         env:
           IUT_USER: ${{ secrets.IUT_USER }}
@@ -65,7 +74,7 @@ jobs:
             set ftp:ssl-allow 0;
             set sftp:auto-confirm yes;
             cd public_html;
-            mkdir -p nooble-ui
-            mirror --reverse --verbose dist nooble-ui/dist
+            mkdir -p nooble-ui;
+            mirror --reverse --verbose dist nooble-ui
             bye
           "
