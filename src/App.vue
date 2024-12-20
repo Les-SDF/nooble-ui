@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 
-import { ref } from 'vue';
+import { reactive, type Ref, ref } from 'vue'
 import { apiStore } from '@/util/apiStore';
+import type { User } from '@/type.ts'
 
 const loaded = ref(false);
 const menuActive = ref(false);
@@ -36,6 +37,12 @@ apiStore.refresh().then(() => {
   loaded.value = true;
 });
 
+const user = reactive<Partial<User>>({});
+if (apiStore.utilisateurConnecte) {
+  Object.assign(user, apiStore.utilisateurConnecte);
+}
+
+
 </script>
 
 <template>
@@ -50,13 +57,14 @@ apiStore.refresh().then(() => {
         <h1 @click="toggleMenu">Menu</h1>
         <ul>
           <li @click="menuActive = false">
-            <RouterLink to="/">Home</RouterLink>
+            <RouterLink :to="{name: 'HomeView'}">Home</RouterLink>
           </li>
           <li @click="menuActive = false">
-            <RouterLink to="/events">Events</RouterLink>
+            <RouterLink :to="{name: 'EventList'}">Events</RouterLink>
           </li>
           <li v-if="isLoggedIn" @click="menuActive = false">
-            <RouterLink to="/profile">Profile</RouterLink>
+<!--            TODO: Remplacer par user.id-->
+            <RouterLink :to="{name: 'ProfileUser', params: {id: 1}}">Profile</RouterLink>
           </li>
         </ul>
         <div v-if="isLoggedIn" class="logout-btn" @click="logout">

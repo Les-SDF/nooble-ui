@@ -5,28 +5,19 @@
 import { apiStore } from '@/util/apiStore.ts'
 import EntityEnum from '@/util/lib/entityEnum.ts'
 import { useRoute } from 'vue-router'
-import type { User } from '@/type.ts'
+import type { User } from '@/type';
+import { reactive } from 'vue'
 
 const route = useRoute();
 
-apiStore.getById(EntityEnum.user, Number(route.params.id)).then(reponseJSON => {
-  console.log(reponseJSON);
-});
+const user = reactive<Partial<User>>({});
 
-const user: User ={
-  id: 1,
-  email: 'test@test.com',
-  username: "Nikhil",
-  image: "https://images.unsplash.com/photo-1593642634443-44adaa06623a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-  members: [
-    {
-      id: 1,
-      team: {
-        name: "Test",
-      }
-    }
-  ],
-}
+apiStore.getById(EntityEnum.user, Number(route.params.id))
+  .then(reponseJSON => {
+    const data = reponseJSON as { member: User };
+    Object.assign(user,data);
+  });
+
 
 
 </script>
