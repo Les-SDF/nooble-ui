@@ -8,8 +8,6 @@ import type { User } from '@/type.ts'
 const loaded = ref(false);
 const menuActive = ref(false);
 const menuHover = ref(false);
-//@TODO A changer quand connexion implemente
-const isLoggedIn = ref(true); // Simule si l'utilisateur est connecté
 
 const toggleMenu = () => {
   menuActive.value = !menuActive.value;
@@ -26,11 +24,6 @@ const onMenuLeave = () => {
   menuHover.value = false;
 };
 
-//@TODO A changer quand connexion implemente
-const logout = () => {
-  isLoggedIn.value = false;
-  apiStore.logout();
-};
 apiStore.refresh().then(() => {
   loaded.value = true;
 }).catch(() => {
@@ -62,12 +55,11 @@ if (apiStore.utilisateurConnecte) {
           <li @click="menuActive = false">
             <RouterLink :to="{name: 'EventList'}">Events</RouterLink>
           </li>
-          <li v-if="isLoggedIn" @click="menuActive = false">
-<!--            TODO: Remplacer par user.id-->
+          <li v-if="apiStore.estConnecte" @click="menuActive = false">
             <RouterLink :to="{name: 'ProfileUser', params: {id: 1}}">Profile</RouterLink>
           </li>
         </ul>
-        <div v-if="isLoggedIn" class="logout-btn" @click="logout">
+        <div v-if="apiStore.estConnecte" class="logout-btn" @click="logout">
           Logout
         </div>
       </nav>
