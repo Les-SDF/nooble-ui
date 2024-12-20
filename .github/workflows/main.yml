@@ -51,10 +51,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: dist_folder
-          path: .
-
-      - name: Install lftp
-        run: sudo apt-get install -y lftp
+          path: dist
 
       - name: Debug - List files
         run: ls -al
