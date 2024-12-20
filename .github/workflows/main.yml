@@ -51,9 +51,13 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: dist_folder
+          path: .
 
       - name: Install lftp
         run: sudo apt-get install -y lftp
+
+      - name: Debug - List files
+        run: ls -al
 
       - name: Deploy via SFTP to nooble-ui folder
         env:
@@ -61,6 +65,7 @@ jobs:
           IUT_PASSW: ${{ secrets.IUT_PASSW }}
         run: |
           echo "Starting deployment..."
+          ls -al dist
           lftp -u $IUT_USER,$IUT_PASSW sftp://ftpinfo.iutmontp.univ-montp2.fr -e "
             set ftp:ssl-allow 0;
             set sftp:auto-confirm yes;
@@ -69,4 +74,3 @@ jobs:
             mirror --reverse --verbose dist ./
             bye
           "
-
