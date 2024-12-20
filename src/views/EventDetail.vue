@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { apiStore } from '@/util/apiStore.ts'
+import EntityEnum from '@/util/lib/entityEnum.ts'
+import { useRoute } from 'vue-router'
 
-apiStore.getById(EntityEnum.event, $route.params.id).then(reponseJSON => {
+const route = useRoute();
+
+apiStore.getById(EntityEnum.event,Number(route.params.id)).then(reponseJSON => {
   console.log(reponseJSON);
 });
 </script>
 
-<template>
 
-</template>
 
 <style scoped lang="scss">
 
