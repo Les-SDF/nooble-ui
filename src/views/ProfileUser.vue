@@ -13,15 +13,20 @@ apiStore.getById(EntityEnum.user, Number(route.params.id)).then(reponseJSON => {
   console.log(reponseJSON);
 });
 
-const user: User = {
+const user: User ={
   id: 1,
   email: 'test@test.com',
   username: "Nikhil",
   image: "https://images.unsplash.com/photo-1593642634443-44adaa06623a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-  team: [{
-    name: "test"
-  }]
-};
+  members: [
+    {
+      id: 1,
+      team: {
+        name: "Test",
+      }
+    }
+  ],
+}
 
 
 </script>

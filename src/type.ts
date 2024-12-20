@@ -1,15 +1,16 @@
 import type { EventStatus } from "./util/lib/EventStatus";
 
 export interface User {
-  id: number;
-  email : string;
-  username : string;
-  members: Member[];
-  customerRegistrations: CustomerRegistration[];
-  managers: Manager[];
-  createdRewards: Reward[];
-  createdEvents: Event[];
-  createdTeams: Team[];
+  id?: number;
+  image?: string;
+  email? : string;
+  username? : string;
+  members?: Member[];
+  customerRegistrations?: CustomerRegistration[];
+  managers?: Manager[];
+  createdRewards?: Reward[];
+  createdEvents?: Event[];
+  createdTeams?: Team[];
 }
 
 export interface Sponsor {
@@ -89,15 +90,17 @@ export interface RefreshToken {
 
 export interface Member {
   id: number;
+  team: Team;
 }
 
 export interface Team {
-  id: number;
-  recipients: Recipient[];
-  teamSponsors: TeamSponsor[];
-  members: Member[];
-  participations: Participation[];
-  teamRegistrations: TeamRegistration[];
+  id?: number;
+  name?: string;
+  recipients?: Recipient[];
+  teamSponsors?: TeamSponsor[];
+  members?: Member[];
+  participations?: Participation[];
+  teamRegistrations?: TeamRegistration[];
 }
 
 export interface TeamRegistration {
