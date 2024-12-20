@@ -1,4 +1,7 @@
 import type { EventStatus } from "./util/lib/EventStatus";
+import type { MemberStatus } from "./util/lib/MemberStatus";
+import type { Visibility } from "./util/lib/Visibility";
+import type { RewardType } from "./util/lib/rewardType";
 
 export interface User {
   id?: number;
@@ -20,30 +23,37 @@ export interface Sponsor {
 }
 
 export interface Event {
-  id: number;
-  name: string;
-  description : string;
-  creator: User;
-  endDate : Date;
-  startDate : Date;
-  eventRewards: EventReward[];
-  eventSponsors: EventSponsor[];
-  customerRegistrations: CustomerRegistration[];
-  confrontations: Confrontation[];
-  managers: Manager[];
+  id?: number;
+  name?: string;
+  description ?: string;
+  creator?: User;
+  endDate ?: Date;
+  startDate ?: Date;
+  eventRewards?: EventReward[];
+  eventSponsors?: EventSponsor[];
+  customerRegistrations?: CustomerRegistration[];
+  confrontations?: Confrontation[];
+  price ?: number;
+  managers?: Manager[];
   teamRegistrations: TeamRegistration[];
-  status: EventStatus | undefined;
+  status?: EventStatus | undefined;
+  participantsVisibility ?: Visibility | undefined;
+  maxParticipants ?: number;
 }
 
 export interface Reward {
-  id: number;
-  prizePacks: PrizePack[];
+  id?: number;
+  name ?: string;
+  description ?: string;
+  creator ?: User;
+  rewardType ?: RewardType;
+  prizePacks ?: PrizePack[];
 }
 
 export interface EventReward {
-  id: number;
-  prizePacks: PrizePack[];
-  recipients: Recipient[];
+  id?: number;
+  prizePacks?: PrizePack[];
+  recipients?: Recipient[];
 }
 
 export interface TeamSponsor {
@@ -77,7 +87,10 @@ export interface Participation {
 }
 
 export interface PrizePack {
-  id: number;
+  id?: number;
+  quantity ?: number;
+  reward ?: Reward;
+  eventReward ?: EventReward;
 }
 
 export interface Recipient {
@@ -89,8 +102,10 @@ export interface RefreshToken {
 }
 
 export interface Member {
-  id: number;
-  team: Team;
+  id ?: number;
+  team ?: Team;
+  status?: MemberStatus;
+  user ?: User;
 }
 
 export interface Team {
@@ -104,5 +119,6 @@ export interface Team {
 }
 
 export interface TeamRegistration {
-  id: number;
+  id?: number;
+  team ?: Team[];
 }
