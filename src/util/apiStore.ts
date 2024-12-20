@@ -73,9 +73,15 @@ export const apiStore = reactive({
         if (!reponsehttp.ok) {
           return reponsehttp.json()
             .then(reponseJSON => ({ success: false, error: reponseJSON.message }));
+        }else {
+          return reponsehttp.json()
+          .then(reponseJSON => {
+            this.utilisateurConnecte = reponseJSON;
+            this.estConnecte = true;
+            console.log(reponseJSON);
+            return {success: true};
+          })
         }
-        console.log("TOKEN REFRESH")
-        return { success: true };
       })
       .catch(error => ({ success: false, error: error.message }));
   },
