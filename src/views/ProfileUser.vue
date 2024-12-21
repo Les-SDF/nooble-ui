@@ -1,22 +1,29 @@
 <script setup lang="ts">
 
-//@TODO remplacer par un appel à /users/{id}
-
 import { apiStore } from '@/util/apiStore.ts'
 import EntityEnum from '@/util/lib/entityEnum.ts'
 import { useRoute } from 'vue-router'
 import type { User } from '@/type';
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
 const route = useRoute();
-
 const user = reactive<Partial<User>>({});
+
+const code = ref('');
 
 apiStore.getById(EntityEnum.user, Number(route.params.id))
   .then(reponseJSON => {
     const data = reponseJSON as { member: User };
     Object.assign(user,data);
   });
+
+const submitCode = async () => {
+  apiStore.getByCode(code.value).then(reponseJSON => {
+    const data = reponseJSON as { member: User };
+    Object.assign(user,data);
+  });
+  apiStore.patch(EntityEnum.user, Number(route.params.id), user);
+};
 
 
 
@@ -108,6 +115,58 @@ apiStore.getById(EntityEnum.user, Number(route.params.id))
 
         <hr class="border-gray-700" />
 
+        <!-- Update with API Section -->
+        <div class="md:inline-flex w-full space-y-4 md:space-y-0 p-8 text-gray-400 items-center">
+          <h2 class="md:w-4/12 max-w-sm mx-auto">Code annuaire</h2>
+          <div class="md:w-5/12 w-full md:pl-9 max-w-sm mx-auto space-y-5 md:inline-flex pl-2">
+            <div class="w-full inline-flex border-b bg-gray-800 border-gray-700 rounded">
+              <div class="w-1/12 pt-2">
+                <svg
+                  fill="none"
+                  class="w-6 text-gray-400 mx-auto"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12h6m-3-3v6m3 6H6a2 2 0 01-2-2V6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="text"
+                v-model="code"
+                class="w-11/12 focus:outline-none focus:text-gray-300 p-2 ml-4 bg-transparent text-white"
+                placeholder="Enter code"
+              />
+            </div>
+          </div>
+
+          <div class="md:w-3/12 text-center md:pl-6">
+            <button
+              @click="submitCode"
+              class="text-white w-full mx-auto max-w-sm rounded-md text-center bg-indigo-500 py-2 px-4 inline-flex items-center focus:outline-none md:float-right"
+            >
+              <svg
+                fill="none"
+                class="w-4 text-white mr-2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              Apply
+            </button>
+          </div>
+        </div>
+
         <!-- Password -->
         <div class="md:inline-flex w-full space-y-4 md:space-y-0 p-8 text-gray-400 items-center">
           <h2 class="md:w-4/12 max-w-sm mx-auto">Change password</h2>
@@ -181,6 +240,7 @@ apiStore.getById(EntityEnum.user, Number(route.params.id))
     </div>
   </section>
 </template>
+
 
 
 

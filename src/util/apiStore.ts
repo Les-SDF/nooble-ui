@@ -147,5 +147,65 @@ export const apiStore = reactive({
       console.error("Request failed:", error);
       return { success: false, error: error.message };
     });
-  }
+  },
+  patch(ressource: string, id:number, data: Record<string, unknown>): Promise<{ success: boolean, error?: string }> {
+    console.log("data create : "+ JSON.stringify(data));
+    return fetch(`${this.apiUrl}${ressource}/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: 'include',
+      body: JSON.stringify(data),
+    })
+      .then(reponsehttp => {
+        if (reponsehttp.ok) {
+          return reponsehttp.json()
+            .then(() => {
+              return { success: true };
+            });
+        }
+        else {
+          return reponsehttp.json()
+            .then(reponseJSON => {
+              return { success: false, error: reponseJSON.message };
+            });
+        }
+      })
+      .catch(error => {
+        console.error("Request failed:", error);
+        return { success: false, error: error.message };
+      });
+  },
+  delete(ressource: string, id:number): Promise<{ success: boolean, error?: string }> {
+    return fetch(`${this.apiUrl}${ressource}/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: 'include',
+    })
+      .then(reponsehttp => {
+        if (reponsehttp.ok) {
+          return reponsehttp.json()
+            .then(() => {
+              return { success: true };
+            });
+        }
+        else {
+          return reponsehttp.json()
+            .then(reponseJSON => {
+              return { success: false, error: reponseJSON.message };
+            });
+        }
+      })
+      .catch(error => {
+        console.error("Request failed:", error);
+        return { success: false, error: error.message };
+      });
+  },
+  getByCode(id: string): Promise<unknown> {
+    return fetch(`http://localhost/stalker/public/users/${id}/json`)
+      .then(response => response.json());
+  },
 })
