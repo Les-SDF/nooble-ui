@@ -58,6 +58,9 @@ if (apiStore.utilisateurConnecte) {
           <li v-if="apiStore.estConnecte" @click="menuActive = false">
             <RouterLink :to="{name: 'ProfileUser', params: {id: 1}}">Profile</RouterLink>
           </li>
+          <li v-if="apiStore.estConnecte" @click="menuActive = false">
+            <RouterLink :to="{name: 'EventUser', params: {id: apiStore.utilisateurConnecte.id}}">Mes Events</RouterLink>
+          </li>
         </ul>
         <div v-if="apiStore.estConnecte" class="logout-btn" @click="logout">
           Logout

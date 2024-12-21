@@ -23,6 +23,11 @@ const router = createRouter({
       component: () => import('@/views/ProfileUser.vue'),
     },
     {
+      path: '/users/:id/events',
+      name: 'EventUser',
+      component: () => import('@/views/EventUser.vue'),
+    },
+    {
       path: '/events',
       name: 'EventList',
       component: () => import('@/views/EventsList.vue'),

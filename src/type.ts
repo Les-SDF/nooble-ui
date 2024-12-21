@@ -4,7 +4,7 @@ import type { Visibility } from "./util/lib/Visibility";
 import type { RewardType } from "./util/lib/rewardType";
 
 export interface User {
-  id?: number;
+  id: number;
   image?: string;
   email? : string;
   username? : string;
@@ -23,7 +23,7 @@ export interface Sponsor {
 }
 
 export interface Event {
-  id?: number;
+  id: number;
   name?: string;
   description ?: string;
   creator?: User;
@@ -35,14 +35,14 @@ export interface Event {
   confrontations?: Confrontation[];
   price ?: number;
   managers?: Manager[];
-  teamRegistrations: TeamRegistration[];
+  teamRegistrations?: TeamRegistration[];
   status?: EventStatus | undefined;
   participantsVisibility ?: Visibility | undefined;
   maxParticipants ?: number;
 }
 
 export interface Reward {
-  id?: number;
+  id: number;
   name ?: string;
   description ?: string;
   creator ?: User;
@@ -51,7 +51,7 @@ export interface Reward {
 }
 
 export interface EventReward {
-  id?: number;
+  id: number;
   prizePacks?: PrizePack[];
   recipients?: Recipient[];
 }
@@ -87,7 +87,7 @@ export interface Participation {
 }
 
 export interface PrizePack {
-  id?: number;
+  id: number;
   quantity ?: number;
   reward ?: Reward;
   eventReward ?: EventReward;
@@ -102,14 +102,14 @@ export interface RefreshToken {
 }
 
 export interface Member {
-  id ?: number;
+  id : number;
   team ?: Team;
   status?: MemberStatus;
   user ?: User;
 }
 
 export interface Team {
-  id?: number;
+  id: number;
   name?: string;
   recipients?: Recipient[];
   teamSponsors?: TeamSponsor[];
@@ -119,6 +119,7 @@ export interface Team {
 }
 
 export interface TeamRegistration {
-  id?: number;
+  id: number;
   team ?: Team[];
+  event ?: Event;
 }
