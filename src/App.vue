@@ -8,6 +8,7 @@ import type { User } from '@/type.ts'
 const loaded = ref(false);
 const menuActive = ref(false);
 const menuHover = ref(false);
+const isLoggedIn = ref(true);
 
 const toggleMenu = () => {
   menuActive.value = !menuActive.value;
@@ -24,12 +25,16 @@ const onMenuLeave = () => {
   menuHover.value = false;
 };
 
+const logout = () => {
+  isLoggedIn.value = false;
+  apiStore.logout();
+};
+
 apiStore.refresh().then(() => {
   loaded.value = true;
 }).catch(() => {
   loaded.value = true;
 });
-
 const user = reactive<Partial<User>>({});
 if (apiStore.utilisateurConnecte) {
   Object.assign(user, apiStore.utilisateurConnecte);
@@ -62,9 +67,9 @@ if (apiStore.utilisateurConnecte) {
             <RouterLink :to="{name: 'EventUser', params: {id: apiStore.utilisateurConnecte.id}}">Mes Events</RouterLink>
           </li>
         </ul>
-        <div v-if="apiStore.estConnecte" class="logout-btn" @click="logout">
+        <button v-if="apiStore.estConnecte" class="logout-btn" @click="logout">
           Logout
-        </div>
+        </button>
       </nav>
       <main :class="{ 'menu-active': menuActive }">
         <RouterView />
