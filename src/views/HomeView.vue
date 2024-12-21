@@ -1,18 +1,14 @@
 <script lang="ts" setup>
 import { FwbJumbotron } from 'flowbite-vue'
 import StarsBackground from '@/components/StarsBackground.vue'
-import EventCard from '@/components/EventCard.vue'
 import { ref } from 'vue'
 import UserLogin from '@/views/UserLogin.vue'
 import UserSignup from '@/views/UserSignup.vue'
 // import { ref } from 'vue';
-import type { Ref } from 'vue';
 // import type { User } from '@/types';
 // import { apiStore } from '@/util/apiStore';
 // import EntityEnum from '@/util/lib/entityEnum';
-import type { Event } from '@/type';
 import { apiStore } from '@/util/apiStore';
-import EntityEnum from '@/util/lib/entityEnum';
 
 // const users: Ref<User[]> = ref([]);
 
@@ -27,14 +23,6 @@ import EntityEnum from '@/util/lib/entityEnum';
 //   user.value = response;
 // });
 
-const events: Ref<Event[]> = ref([]);
-
-apiStore.getAll(EntityEnum.event).then((reponseJSON) => {
-  const data = reponseJSON as { member: Event[] };
-  console.log(data);
-  events.value = data.member;
-  console.log(events);
-});
 
 const showSignInModal = ref(false);
 const showSignOutModal = ref(false);
@@ -87,18 +75,6 @@ console.log("Est connecter : " + apiStore.estConnecte );
       </div>
     </div>
 
-    <div class="card-list">
-      <event-card v-for="(nft, index) in events"
-      :id="nft.id"
-      :key="index"
-      :title="nft.name"
-      :description="nft.description"
-      :creator="nft.creator.username || undefined"
-      :startDate="new Date(nft.startDate) ? new Date(nft.startDate) : new Date()"
-      :endDate="new Date(nft.endDate) ? new Date(nft.endDate) : new Date()"
-      :status="nft.status"
-      />
-    </div>
     <stars-background></stars-background>
   </div>
 </template>
