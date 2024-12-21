@@ -26,21 +26,15 @@ const events: Ref<Event[]> = ref([]);
 //   events.value = data.member;
 // });
 function showUserEvent(){
-  user.members?.forEach((member) => {
-    const team = member.team;
-    if (team?.teamRegistrations) {
-      team.teamRegistrations.forEach((registration) => {
-        const event = registration.event;
-        if (event?.id) {
-          apiStore.getById(EntityEnum.event, event.id).then((response) => {
+  if(user.participatedEvents != null){
+      user.participatedEvents.forEach((id) => {
+            apiStore.getById(EntityEnum.event, id).then((response) => {
             console.log("datat : " + JSON.stringify(response));
             const eventData = response as Event;
             events.value.push(eventData);
           });
-        }
-      });
-    }
-  });
+      })
+  }
 }
 </script>
 

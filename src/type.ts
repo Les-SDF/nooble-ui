@@ -14,6 +14,7 @@ export interface User {
   createdRewards?: Reward[];
   createdEvents?: Event[];
   createdTeams?: Team[];
+  participatedEvents ?: number[];
 }
 
 export interface Sponsor {
