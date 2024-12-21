@@ -4,6 +4,7 @@ import { apiStore } from '@/util/apiStore.ts'
 import EntityEnum from '@/util/lib/entityEnum.ts'
 import EventCard from '@/components/EventCard.vue'
 import type { Event } from '@/type';
+import LoadingMenu from '@/components/LoadingMenu.vue'
 
 const events: Ref<Event[]> = ref([]);
 const isLoading = ref(true);
@@ -20,8 +21,8 @@ apiStore.getAll(EntityEnum.event).then((reponseJSON) => {
 </script>
 
 <template>
-  <div v-if="isLoading" class="loading-container">
-    <img src="@/assets/loading.gif" alt="Chargement..." />
+  <div v-if="isLoading">
+    <LoadingMenu></LoadingMenu>
   </div>
   <div v-else class="min-h-screen p-6 flex justify-center">
     <div class="text-center w-full lg:w-2/3">

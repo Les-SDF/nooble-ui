@@ -1,19 +1,13 @@
 <script setup lang="ts">
-import loading from '@/assets/loading.gif';
+import loading from '@/assets/Loading.gif';
 </script>
 
 <template>
-  <div class="loading-spinner w-[100%] flex justify-center align-mid h-[calc(100%)]">
+  <div class="fixed inset-0 flex items-center justify-center bg-opacity-80 z-[9999]">
     <img :src="loading" alt="Loading" />
   </div>
 </template>
 
-<style scoped lang="scss">
-.loading-spinner{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
 
+<style scoped lang="scss">
 </style>
