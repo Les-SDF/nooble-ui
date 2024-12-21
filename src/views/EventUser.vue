@@ -6,10 +6,12 @@ import EventCard from '@/components/EventCard.vue'
 import { useRoute } from 'vue-router'
 import type { Event } from '@/type';
 import type { User } from '@/type';
+import LoadingMenu from '@/components/LoadingMenu.vue'
 
 const route = useRoute();
 
 const user = reactive<Partial<User>>({});
+const isLoading = ref(true);
 
 apiStore.getById(EntityEnum.user, Number(route.params.id))
   .then(reponseJSON => {
@@ -17,7 +19,9 @@ apiStore.getById(EntityEnum.user, Number(route.params.id))
     const data = reponseJSON as { member: User };
     Object.assign(user,data);
     showUserEvent();
-  });
+  }).finally(()=>{
+  isLoading.value = false;
+});
 
 const events: Ref<Event[]> = ref([]);
 
@@ -39,7 +43,10 @@ function showUserEvent(){
 </script>
 
 <template>
-  <div class="min-h-screen p-6 flex justify-center">
+  <div v-if="isLoading">
+    <LoadingMenu></LoadingMenu>
+  </div>
+  <div v-else class="min-h-screen p-6 flex justify-center">
     <div class="text-center w-full lg:w-2/3">
       <div class="mt-5 mb-5 flex w-full items-center justify-center">
         <h1

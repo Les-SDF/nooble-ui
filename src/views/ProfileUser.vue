@@ -5,17 +5,21 @@ import EntityEnum from '@/util/lib/entityEnum.ts'
 import { useRoute } from 'vue-router'
 import type { User } from '@/type';
 import { reactive, ref } from 'vue'
+import LoadingMenu from '@/components/LoadingMenu.vue'
 
 const route = useRoute();
 const user = reactive<Partial<User>>({});
 
 const code = ref('');
+const isLoading = ref(true);
 
 apiStore.getById(EntityEnum.user, Number(route.params.id))
   .then(reponseJSON => {
     const data = reponseJSON as { member: User };
     Object.assign(user,data);
-  });
+  }).finally(()=>{
+  isLoading.value = false;
+});
 
 const submitCode = async () => {
   apiStore.getByCode(code.value).then(reponseJSON => {
@@ -34,7 +38,10 @@ const supressAccount = async () => {
 </script>
 
 <template>
-  <section class="py-40 h-screen">
+  <div v-if="isLoading">
+    <LoadingMenu></LoadingMenu>
+  </div>
+  <section v-else class="py-40 h-screen">
 
     <!-- Header -->
     <div class="mx-auto container max-w-2xl md:w-3/4 shadow-md">

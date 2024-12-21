@@ -3,11 +3,13 @@ import { apiStore } from '@/util/apiStore.ts'
 import EntityEnum from '@/util/lib/entityEnum.ts'
 import { useRoute } from 'vue-router'
 import type { Event, User } from '@/type.ts'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
+import LoadingMenu from '@/components/LoadingMenu.vue'
 
 const route = useRoute();
 
 const event = reactive<Partial<Event>>({});
+const isLoading = ref(true);
 
 function formatDate(date:Date) {
   if (!date) return null;
@@ -22,18 +24,23 @@ apiStore.getById(EntityEnum.user, Number(apiStore.utilisateurConnecte.id))
     console.log( JSON.stringify(reponseJSON));
     const data = reponseJSON as { member: User };
     Object.assign(user,data);
-  });
+  })
 
 }
 apiStore.getById(EntityEnum.event,Number(route.params.id)).then(reponseJSON => {
   const data = reponseJSON as { member: Event };
   Object.assign(event,data);
   console.log(reponseJSON);
+}).finally(()=>{
+  isLoading.value = false;
 });
 </script>
 
 <template>
-  <div class="m-auto p-6 max-w-4xl w-2/3">
+  <div v-if="isLoading">
+    <LoadingMenu></LoadingMenu>
+  </div>
+  <div v-else class="m-auto p-6 max-w-4xl w-2/3">
     <!-- Card principale pour l'événement -->
     <div class="bg-white p-6 rounded-lg shadow-md mb-6 space-y-6">
 
