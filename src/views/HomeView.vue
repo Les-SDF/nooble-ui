@@ -89,12 +89,13 @@ console.log("Est connecter : " + apiStore.estConnecte );
 
     <div class="card-list">
       <event-card v-for="(nft, index) in events"
+      :id="nft.id"
       :key="index"
       :title="nft.name"
       :description="nft.description"
-      :creator="nft.creator.username"
-      :startDate="new Date(nft.startDate)"
-      :endDate="new Date(nft.endDate)"
+      :creator="nft.creator.username || undefined"
+      :startDate="new Date(nft.startDate) ? new Date(nft.startDate) : new Date()"
+      :endDate="new Date(nft.endDate) ? new Date(nft.endDate) : new Date()"
       :status="nft.status"
       />
     </div>
