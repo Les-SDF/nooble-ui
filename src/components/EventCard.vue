@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { EventStatus } from '@/util/lib/EventStatus';
+import { RouterLink } from 'vue-router'
 
 const props = defineProps<{
+  id?:number;
   title?: string;
   image?: string;
   description?: string;
@@ -12,32 +14,26 @@ const props = defineProps<{
   creator?: string;
 }>();
 
+
 let computedTime: number;
 
-if (props.time == null) {
-  const now = new Date();
-
-  if (props.startDate && props.startDate > now) {
-    computedTime = Math.ceil((props.startDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-  } else if (props.endDate && props.endDate > now) {
-    computedTime = Math.ceil((props.endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-  } else {
-    computedTime = 0;
-  }
-} else {
-  computedTime = props.time;
+if (props.endDate && props.endDate.getTime() > Date.now()) {
+  computedTime = Math.ceil((props.endDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
 }
+
 </script>,
 
 <template>
+  <RouterLink :to="{ name: 'EventDetail', params: { id: id } }">
   <div class="nft">
     <div class='main'>
-      <img class='tokenImage' :src="image || 'https://images.unsplash.com/photo-1621075160523-b936ad96132a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'" alt="NFT" />
-      <p class='description'>{{ description || 'Our Kibertopiks will give you nothing, waste your money on us' }}.</p>
+      <img class='tokenImage' :src="image || 'https://www.legrand.mg/modules/custom/legrand_ecat/assets/img/no-image.png'" alt="NFT" />
+      <h2>{{title}}</h2>
+      <p class='description'>{{ description || 'Pas de description' }}.</p>
       <div class='tokenInfo'>
         <div class="duration">
           <ins>◷</ins>
-          <p>{{computedTime}} days left</p>
+          <p>{{computedTime || 0}} days left</p>
           <span class="separator">|</span>
           <p>{{status || "Unknown"}}</p>
         </div>
@@ -51,6 +47,7 @@ if (props.time == null) {
       </div>
     </div>
   </div>
+  </RouterLink>
 </template>
 
 <style lang="scss" scoped>
@@ -69,7 +66,7 @@ code {
 }
 
 h2 {
-  height: 2rem;
+  height: 3rem;
   margin-top: 10px;
   margin-bottom: 10px;
   overflow: hidden;

@@ -25,16 +25,17 @@ apiStore.getAll(EntityEnum.event).then((reponseJSON) => {
         </h1>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <event-card
-          v-for="(event, index) in events"
-          :key="index"
-          :title="event.name"
-          :description="event.description"
-          :creator="event.creator.username"
-          :startDate="new Date(event.startDate)"
-          :endDate="new Date(event.endDate)"
-          :status="event.status"
-        />
+          <event-card
+            v-for="(event, index) in events"
+            :key="index"
+            :id = event.id
+            :title="event.name"
+            :description="event.description"
+            :creator="event.creator.username"
+            :startDate="new Date(event.startDate)"
+            :endDate="new Date(event.endDate)"
+            :status="event.status"
+          />
       </div>
     </div>
   </div>

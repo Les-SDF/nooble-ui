@@ -1587,10 +1587,6 @@ input:checked + .toggle-bg {
   height: 24rem;
 }
 
-.h-\[calc\(100\%-50px\)\] {
-  height: calc(100% - 50px);
-}
-
 .h-auto {
   height: auto;
 }
