@@ -1603,6 +1603,10 @@ input:checked + .toggle-bg {
   height: 100vh;
 }
 
+.h-\[calc\(100\%\)\] {
+  height: calc(100%);
+}
+
 .min-h-screen {
   min-height: 100vh;
 }

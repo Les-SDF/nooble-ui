@@ -6,17 +6,24 @@ import EventCard from '@/components/EventCard.vue'
 import type { Event } from '@/type';
 
 const events: Ref<Event[]> = ref([]);
+const isLoading = ref(true);
 
+isLoading.value = true;
 apiStore.getAll(EntityEnum.event).then((reponseJSON) => {
   const data = reponseJSON as { member: Event[] };
   console.log(data);
   events.value = data.member;
   console.log(events);
+}).finally(()=>{
+  isLoading.value = false;
 });
 </script>
 
 <template>
-  <div class="min-h-screen p-6 flex justify-center">
+  <div v-if="isLoading" class="loading-container">
+    <img src="@/assets/loading.gif" alt="Chargement..." />
+  </div>
+  <div v-else class="min-h-screen p-6 flex justify-center">
     <div class="text-center w-full lg:w-2/3">
       <div class="mt-5 mb-5 flex w-full items-center justify-center">
         <h1

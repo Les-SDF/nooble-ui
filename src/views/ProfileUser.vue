@@ -25,6 +25,10 @@ const submitCode = async () => {
   apiStore.patch(EntityEnum.user, Number(route.params.id), user);
 };
 
+const supressAccount = async () => {
+  apiStore.delete(EntityEnum.user, Number(route.params.id));
+};
+
 
 
 </script>
@@ -219,7 +223,7 @@ const submitCode = async () => {
         <hr class="border-gray-700" />
 
         <div class="w-full p-4 text-right text-gray-400">
-          <button class="inline-flex items-center focus:outline-none mr-4 text-red-400">
+          <button @click="supressAccount" class="inline-flex items-center focus:outline-none mr-4 text-red-400">
             <svg
               fill="none"
               class="w-4 mr-2"
